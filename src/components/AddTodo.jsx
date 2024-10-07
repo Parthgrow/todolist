@@ -42,8 +42,8 @@ function AddToDo() {
   };
 
   return (
-    <div className="flex gap-5 mx-2 border-2 border-black px-2 py-4 rounded-sm">
-      <div className="flex flex-col gap-2">
+    <div className="flex gap-5 mx-2  rounded-sm  px-[10px] my-3 ">
+      <div className="flex flex-col gap-2 ">
         <input
           type="text"
           placeholder="Add to do"
@@ -51,7 +51,7 @@ function AddToDo() {
           onChange={(e) => {
             setInput(e.target.value);
           }}
-          className="px-2 mt-4"
+          className="px-2 mt-4 bg-black border-none"
         />
         <p>
           {flag && (
@@ -67,17 +67,17 @@ function AddToDo() {
         min={today}
         value={date}
         onChange={handleDate}
-        className="border-none focus:border-none"
+        className="text-white px-1 h-[30px] my-3 bg-gray-900 rounded-sm"
       />
 
       <button
         onClick={handleAddtodo}
-        className="bg-black text-white h-fit px-4 py-2 my-2 rounded-sm"
+        className="bg-black text-white h-fit px-[5px] py-[5px] my-2 rounded-sm border-gray-700 border-[1.5px] hover:bg-gray-950"
       >
         Add to do
       </button>
       <button
-        className="bg-black px-4 py-2 text-white rounded-sm my-2"
+        className="bg-black text-white h-fit px-[5px] py-[5px] my-2 rounded-sm border-gray-700 border-[1.5px] hover:bg-gray-950"
         onClick={handleReset}
       >
         Reset

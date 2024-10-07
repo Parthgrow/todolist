@@ -110,6 +110,7 @@ const todoSlice  = createSlice({
             const todo = action.payload ; 
             const id  = todo.id ; 
             const notes = todo.notes ; 
+           
 
             let todos = state.todos ; 
 
@@ -118,10 +119,12 @@ const todoSlice  = createSlice({
                 if(todos[i].id === id)
                 {
                     todos[i].notes = notes ; 
+                   
                 }
             }
 
             state.todos = todos ; 
+            localStorage.setItem('todos', JSON.stringify(state.todos)); 
         }
 
     }

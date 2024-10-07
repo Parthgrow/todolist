@@ -57,7 +57,7 @@ function TodoComponent({ todo }) {
         <p className="text-base">{todo.text}</p>
         <p className="text-base">{todo.date}</p>
         <button
-          className="bg-black text-white text-xs h-[23px] rounded-sm px-[3px] py-[1px] mt-1  hover:text-black hover:bg-gray-400"
+          className="bg-black text-sm py-[3px] text-white h-fit px-[3px] hover:text-gray-400 rounded-sm border-gray-700 border-[1.5px] hover:bg-gray-950"
           onClick={() => {
             dispatch(deleteTodo(todo.id));
           }}
@@ -65,7 +65,7 @@ function TodoComponent({ todo }) {
           Delete
         </button>
         <button
-          className="bg-black text-white text-xs h-[23px] rounded-sm px-[3px] py-[1px] mt-1 hover:text-black hover:bg-gray-400"
+          className="bg-black text-sm py-[3px] text-white h-fit px-[3px] hover:text-gray-400 rounded-sm border-gray-700 border-[1.5px] hover:bg-gray-950"
           onClick={() => {
             setOpenTask(!openTask);
           }}
@@ -73,10 +73,10 @@ function TodoComponent({ todo }) {
           Notes
         </button>
         {isNear && (
-          <div className="flex gap-1 mt-1 ">
+          <div className="flex gap-1 mt-[2px] ">
             <AiFillAlert className="text-red-600  text-xl" />{" "}
             <span>{nearValue}</span>
-            remaining
+            {nearValue > 1 ? "days remaining" : "day remaining "}
           </div>
         )}
       </div>
