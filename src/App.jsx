@@ -1,6 +1,4 @@
-import { useState } from "react";
-import AddToDo from "./components/AddToDo";
-import TodoComponent from "./components/TodoComponent";
+import AddTodo from "./components/AddTodo";
 import { useSelector } from "react-redux";
 import ShowTodo from "./components/ShowTodo";
 
@@ -14,7 +12,7 @@ function App() {
       <div className="min-h-screen bg-black py-20 ">
         <div className="flex gap-20  items-center justify-center ">
           <div className="bg-gray-800/5 rounded-md text-white">
-            <AddToDo />
+            <AddTodo />
             <ShowTodo />
           </div>
           {/* <div className="border-2 border-black">
