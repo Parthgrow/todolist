@@ -2,12 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateNotes } from "../features/todoSlice";
+import Button from "@mui/material/Button";
 
 function OpenTodoComp({ todo }) {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [date, setDate] = useState(todo.date);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(todo.notes);
 
   const handleEdit = () => {
     const action = {
@@ -15,7 +16,11 @@ function OpenTodoComp({ todo }) {
       notes: text,
     };
     dispatch(updateNotes(action));
-    setIsEdit(!isEdit);
+    if (isEdit) {
+      setIsEdit(false);
+    } else {
+      setIsEdit(true);
+    }
   };
   return (
     <>
@@ -24,11 +29,11 @@ function OpenTodoComp({ todo }) {
           {!isEdit ? (
             <div className="p-2 text-white">{todo.notes}</div>
           ) : (
-            <div className="mb-2 ">
+            <div className="mb-2  ">
               <textarea
                 name=""
                 id=""
-                className=" bg-gray-500/30 rounded-sm w-full cursor-text text-white  p-2"
+                className=" bg-black rounded-sm w-full cursor-text text-white  p-2"
                 value={text}
                 onChange={(event) => {
                   setText(event.target.value);
@@ -53,21 +58,40 @@ function OpenTodoComp({ todo }) {
               />
             </div>
           )}
-          <button
-            className="text-white px-1 h-[30px]  bg-gray-900 rounded-sm mx-2"
+
+          <Button
+            sx={{
+              color: "white",
+              px: 1,
+              height: "30px",
+              backgroundColor: "black",
+              borderRadius: "2px",
+              mx: 1,
+              "&:hover": {
+                backgroundColor: "orange", // Optional hover color
+              },
+            }}
             onClick={handleEdit}
           >
             {isEdit ? "Save" : "Edit"}
-          </button>
+          </Button>
           {isEdit && (
-            <button
-              onClick={() => {
-                setIsEdit(false);
+            <Button
+              sx={{
+                color: "white",
+                px: 1,
+                height: "30px",
+                backgroundColor: "black",
+                borderRadius: "2px",
+                mx: 1,
+                "&:hover": {
+                  backgroundColor: "orange", // Optional hover color
+                },
               }}
-              className="text-white px-1 h-[30px] mx-2  bg-gray-900 rounded-sm"
+              onClick={handleEdit}
             >
               Cancel
-            </button>
+            </Button>
           )}
         </div>
       </div>

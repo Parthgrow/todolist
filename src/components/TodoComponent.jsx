@@ -3,12 +3,36 @@ import { useDispatch } from "react-redux";
 import { deleteTodo, updateCheck } from "../features/todoSlice";
 import OpenTodoComp from "./OpenTodoComp";
 import { AiFillAlert } from "react-icons/ai";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
+
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: "#1A2027",
+//   ...theme.typography.body2,
+//   height: openTask ? "fit-content" : "40px",
+
+//   color: theme.palette.text.secondary,
+// }));
 
 function TodoComponent({ todo }) {
   const [openTask, setOpenTask] = useState(false);
   const [isNear, setIsNear] = useState(false);
   const [nearValue, setNearValue] = useState(0);
   const dispatch = useDispatch();
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: "#1A2027",
+    ...theme.typography.body2,
+    height: openTask ? "fit-content" : "40px",
+
+    color: theme.palette.text.secondary,
+  }));
 
   const handleDelete = (id) => {
     dispatch(deleteTodo(id));
@@ -45,43 +69,62 @@ function TodoComponent({ todo }) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 my-2 ">
-      <div className="flex flex-wrap gap-2">
-        <input
+    <Item>
+      <div className="flex flex-col gap-2 my-2 h-fit px-2 ">
+        <div className={todo.checkbox ? "flex  my-2" : "flex"}>
+          {/* <input
           type="checkbox"
           checked={todo.checkbox}
           onClick={() => {
             handleCheck(todo.id);
           }}
-        />
-        <p className="text-base">{todo.text}</p>
-        <p className="text-base">{todo.date}</p>
-        <button
-          className="bg-black text-sm py-[3px] text-white h-fit px-[3px] hover:text-gray-400 rounded-sm border-gray-700 border-[1.5px] hover:bg-gray-950"
-          onClick={() => {
-            dispatch(deleteTodo(todo.id));
-          }}
-        >
-          Delete
-        </button>
-        <button
-          className="bg-black text-sm py-[3px] text-white h-fit px-[3px] hover:text-gray-400 rounded-sm border-gray-700 border-[1.5px] hover:bg-gray-950"
-          onClick={() => {
-            setOpenTask(!openTask);
-          }}
-        >
-          Notes
-        </button>
-        {isNear && (
-          <div className="flex gap-1 mt-[2px] ">
-            <AiFillAlert className="text-red-600  text-xl" />{" "}
-            <span>{nearValue}</span>
-            {nearValue > 1 ? "days remaining" : "day remaining "}
+        /> */}
+
+          <div className="flex gap-2 flex-1">
+            <Checkbox
+              className="relative bottom-2"
+              sx={{ color: "blue" }}
+              checked={todo.checkbox}
+              onClick={() => {
+                handleCheck(todo.id);
+              }}
+            />
+            <p className="text-base text-gray-500"> {todo.text} </p>
+            <p className="text-base text-gray-500"> {todo.date} </p>
           </div>
-        )}
+
+          <div className="flex  mx-2  ">
+            {isNear && (
+              <div className=" ">
+                <AiFillAlert className="text-red-600  text-xl" />
+              </div>
+            )}
+
+            <div className=" relative bottom-2 ">
+              <IconButton
+                aria-label="delete"
+                onClick={() => {
+                  dispatch(deleteTodo(todo.id));
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </div>
+            <div className="relative bottom-2">
+              <IconButton
+                className=""
+                onClick={() => {
+                  setOpenTask(!openTask);
+                }}
+              >
+                {openTask ? <ArrowCircleUpIcon /> : <ArrowCircleDownIcon />}
+              </IconButton>
+            </div>
+          </div>
+        </div>
+        <div>{openTask && <OpenTodoComp todo={todo} />}</div>
       </div>
-      <div>{openTask && <OpenTodoComp todo={todo} />}</div>
-    </div>
+    </Item>
   );
 }
 
