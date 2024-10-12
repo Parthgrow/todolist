@@ -20,9 +20,9 @@ function App() {
           </div> */}
         </div>
 
-        <div className="text-white">
+        {/* <div className="text-white">
           {todos ? JSON.stringify(todos) : "It's null"}
-        </div>
+        </div> */}
       </div>
     </>
   );
